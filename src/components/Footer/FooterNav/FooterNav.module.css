@@ -1,0 +1,25 @@
+.nav_ul{
+    display: flex;
+    padding: 0;
+}
+
+.nav_ul li{
+    display: flex;
+}
+
+.nav_ul li{
+    margin-left: 50px;
+}
+
+.nav_ul li:first-child{
+    margin-left: 0;
+}
+
+.nav_ul li a{
+    text-decoration: none;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    color: rgba(33, 37, 66, 0.7);
+}

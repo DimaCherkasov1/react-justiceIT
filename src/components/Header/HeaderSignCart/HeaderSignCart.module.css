@@ -1,0 +1,26 @@
+.sign_cart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+}
+
+.sign_cart div{
+    display: flex;
+    align-items: center;
+}
+
+.sign_cart span{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    margin-left: 10px;
+}
+
+.user{
+    width: 18px;
+}
+
+.cart{
+    width: 18px;
+}

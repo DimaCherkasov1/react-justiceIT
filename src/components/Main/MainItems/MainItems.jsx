@@ -10,7 +10,6 @@ function MainItems() {
   return (
       <div className={styles.col_items}>
         <Item />
-
       </div>
   )
 }

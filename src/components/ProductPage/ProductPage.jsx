@@ -3,13 +3,14 @@ import styles from "./ProductPage.module.css"
 import {ReactComponent as IceCream2} from "../../assets/Images/icecream2.svg";
 import {ReactComponent as Plus} from "../../assets/Images/plus.svg";
 import {ReactComponent as Minus} from "../../assets/Images/minus.svg";
-import {ReactComponent as Cart} from "../../assets/Images/cart_white.svg";
+import {ReactComponent as CartIcon} from "../../assets/Images/cart_white.svg";
+import {Link} from "react-router-dom";
 
 function ProductPage() {
   return (
       <div className={styles.content_product}>
         <div className="container">
-          <div><span className={styles.fspan}>Main Page</span> / <span className={styles.sspan}>Product Page</span></div>
+          <div><Link to='/' className={styles.ahrefmain}>Main Page</Link> / <span className={styles.sspan}>Product Page</span></div>
         <div className={styles.row_product}>
           <div className={styles.img_product}>
             <IceCream2 />
@@ -26,7 +27,7 @@ function ProductPage() {
             <span>243.00</span> <div className={styles.count}><Minus /> <span>1</span> <Plus /></div>
             </div>
             <div className={styles.button}>
-              <button type="button" className={styles.btn}><Cart />Add to cart</button>
+              <button className={styles.btn}><CartIcon />Add to cart</button>
             </div>
           </div>
         </div>

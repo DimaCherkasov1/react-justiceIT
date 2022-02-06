@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styles from "./Item.module.css"
 import {ReactComponent as IceCream2} from "../../../../assets/Images/icecream2.svg";
+import {Link} from "react-router-dom";
 
 function Item() {
   return (
@@ -11,7 +12,7 @@ function Item() {
         </div>
         </div>
         <div className={styles.name_cream}>
-          <p>Snow Tender Ice Cream</p>
+          <Link to='/item'>Snow Tender Ice Cream</Link>
           <p>$243.00</p>
         </div>
       </div>

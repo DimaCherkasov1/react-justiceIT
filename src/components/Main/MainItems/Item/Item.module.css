@@ -13,23 +13,25 @@
 }
 
 .name_cream{
+    padding: 20px;
     background-color: #FFFFFF;
     border: 1px solid #F4F5FF;
-    border-radius: 30px;
+    border-radius:0 0 30px 30px;
 }
 
-.name_cream p{
-    margin-left: 20px;
+.name_cream a, p{
 }
 
-.name_cream p:first-child{
+.name_cream a{
+    color: #212542;
+    text-decoration: none;
     font-size: 18px;
     font-weight: 600;
     line-height: 22px;
     text-align: left;
 }
 
-.name_cream p:last-child{
+.name_cream p{
     color: rgba(33, 37, 66, 0.7);
     font-size: 16px;
     font-weight: 400;

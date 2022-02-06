@@ -4,15 +4,15 @@ import HeaderSignCart from "./HeaderSignCart/HeaderSignCart";
 import {ReactComponent as Logo} from "../../assets/Images/logo.svg";
 
 
-function Header() {
-  return (
-      <header className={styles.header}>
-        <div className={styles.container}>
-        <Logo />
-        <HeaderSignCart />
-        </div>
-      </header>
-  )
+function Header({signIn, setSignIn, signUp, setSignUp}) {
+    return (
+        <header className={styles.header}>
+            <div className={styles.container}>
+                <Logo/>
+                <HeaderSignCart signIn={signIn} setSignIn={setSignIn} signUp={signUp} setSignUp={setSignUp}/>
+            </div>
+        </header>
+    )
 }
 
 

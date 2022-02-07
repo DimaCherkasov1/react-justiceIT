@@ -1,18 +1,28 @@
-import React from "react";
-import styles from "./Main.module.css"
-import MainTitle from "./MainTitle/MainTitle";
-import MainItems from "./MainItems/MainItems";
+import React from 'react'
+import styles from './Main.module.css'
+import MainTitle from './MainTitle/MainTitle'
+import MainItems from './MainItems/MainItems'
 
-
-function Main(){
-  return(
-      <main className={styles.main}>
-        <div className="container">
-          <MainTitle />
-          <MainItems />
+function Main({ cards }) {
+  return (
+    <main className={styles.main}>
+      <div className="container">
+        <MainTitle />
+        <div className={styles.columns}>
+          {cards.map((item) => {
+            return (
+              <MainItems
+                key={item.id}
+                name={item.name}
+                id={item.id}
+                price={item.price}
+              />
+            )
+          })}
         </div>
-      </main>
+      </div>
+    </main>
   )
 }
 
-export default Main;
+export default Main

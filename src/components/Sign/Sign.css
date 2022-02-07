@@ -28,17 +28,9 @@ h2{
     color: #212542;
 }
 
-.email{
-    display: flex;
-    flex-direction: column;
-}
-
-.password{
-    display: flex;
-    flex-direction: column;
-}
-
 label{
+    display: flex;
+    flex-direction: column;
     margin-top: 20px;
     font-size: 14px;
     font-weight: 600;
@@ -94,9 +86,14 @@ input{
 }
 
 .create-acc a{
+    cursor: pointer;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
     color: #88ADCA;
+}
+
+.create-acc a:hover{
+    text-decoration: underline;
 }

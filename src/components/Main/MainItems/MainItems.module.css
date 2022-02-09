@@ -1,5 +1,10 @@
 .col_items{
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+@media (max-width: 768px) {
+    .col_items{
+        flex-wrap: wrap;
+    }
 }

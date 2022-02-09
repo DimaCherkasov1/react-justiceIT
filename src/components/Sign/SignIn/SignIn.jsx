@@ -3,7 +3,7 @@ import React from 'react'
 function SignIn({ setSignIn, setSignUp }) {
   function signUpTo() {
     setSignIn(false)
-    return setSignUp(true)
+    setSignUp(true)
   }
 
   return (
@@ -26,7 +26,7 @@ function SignIn({ setSignIn, setSignUp }) {
           <button className="btn-register">Register</button>
         </div>
         <div className="create-acc">
-          <span>No account?</span> <a onClick={() => signUpTo()}>Create on</a>
+          <span>No account?</span> <a onClick={signUpTo}>Create on</a>
         </div>
       </form>
     </>

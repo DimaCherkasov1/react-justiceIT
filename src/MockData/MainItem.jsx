@@ -1,9 +1,10 @@
 const cards = [
   {
     name: 'Snow Tender Ice Cream',
-    price: '$240.00',
+    price: 240,
     id: 'BX100BLK00',
-    inCart: 0,
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:
@@ -11,8 +12,10 @@ const cards = [
   },
   {
     name: 'Snow Tender Ice Cream',
-    price: '$241.00',
+    price: 241.0,
     id: 'BX100BLK01',
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:
@@ -20,8 +23,10 @@ const cards = [
   },
   {
     name: 'Snow Tender Ice Cream',
-    price: '$242.00',
+    price: 242.0,
     id: 'BX100BLK02',
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:
@@ -29,8 +34,10 @@ const cards = [
   },
   {
     name: 'Snow Tender Ice Cream',
-    price: '$243.00',
+    price: 243.0,
     id: 'BX100BLK03',
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:
@@ -38,8 +45,10 @@ const cards = [
   },
   {
     name: 'Snow Tender Ice Cream',
-    price: '$244.00',
+    price: 244.0,
     id: 'BX100BLK04',
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:
@@ -47,8 +56,10 @@ const cards = [
   },
   {
     name: 'Snow Tender Ice Cream',
-    price: '$245.00',
+    price: 245.0,
     id: 'BX100BLK05',
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:
@@ -56,8 +67,10 @@ const cards = [
   },
   {
     name: 'Snow Tender Ice Cream',
-    price: '$246.00',
+    price: 246.0,
     id: 'BX100BLK06',
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:
@@ -65,8 +78,10 @@ const cards = [
   },
   {
     name: 'Snow Tender Ice Cream',
-    price: '$247.00',
+    price: 247.0,
     id: 'BX100BLK07',
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:
@@ -74,8 +89,10 @@ const cards = [
   },
   {
     name: 'Snow Tender Ice Cream',
-    price: '$248.00',
+    price: 248.0,
     id: 'BX100BLK08',
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:
@@ -83,8 +100,10 @@ const cards = [
   },
   {
     name: 'Snow Tender Ice Cream',
-    price: '$249.00',
+    price: 249.0,
     id: 'BX100BLK09',
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:
@@ -92,18 +111,21 @@ const cards = [
   },
   {
     name: 'Snow Tender Ice Cream',
-    price: '$250.00',
+    price: 250.0,
     id: 'BX100BLK10',
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:
       'Blast freezing with liquid nitrogen (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, preserving all the flavors, vitamins and nutrients by 99%.',
   },
-
   {
     name: 'Snow Tender Ice Cream',
-    price: '$251.00',
+    price: 251.0,
     id: 'BX100BLK11',
+    inCart: 1,
+    count: 1,
     descriptionOne:
       'Chocolate ice cream has a bright, rich and refreshing taste of the ingredient it contains. Thanks to liquid nitrogen shock freezing (-193°C), which freezes all the ingredients instantly and gives the ice cream an amazingly delicate texture, all the flavors, vitamins and nutrients are preserved by 99%.',
     descriptionTwo:

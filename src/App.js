@@ -6,20 +6,31 @@ import Cart from './components/Cart/Cart'
 import Sign from './components/Sign/Sign'
 import SignIn from './components/Sign/SignIn/SignIn'
 import SignUp from './components/Sign/SignUp/SignUp'
-import { useState } from 'react'
-import cards from './MockData/MainItem'
+import { useCallback, useState } from 'react'
+import MockCards from './MockData/MainItem'
 
 import { Routes, Route } from 'react-router-dom'
 
 import './App.css'
 
 function App() {
+  const [cards, setCards] = useState(MockCards)
   const [signIn, setSignIn] = useState(false)
   const [signUp, setSignUp] = useState(false)
   const [arr, setArr] = useState([])
+
+  const removeItem = useCallback(
+    (id) => {
+      setArr(arr.filter((x) => x.id !== id))
+    },
+    [arr]
+  )
+
   return (
     <div className="wrapper">
       <Header
+        arr={arr}
+        setArr={setArr}
         signIn={signIn}
         setSignIn={setSignIn}
         signUp={signUp}
@@ -28,16 +39,31 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/" element={<Main cards={cards} />} />
-          {cards.map((card) => (
+          {cards?.map((card, index) => (
             <Route
               key={card.id}
               path={`/item/${card.id}`}
-              element={<ProductPage card={card} arr={arr} setArr={setArr} />}
+              element={
+                <ProductPage
+                  card={card}
+                  arr={arr}
+                  setArr={setArr}
+                  setCard={setCards}
+                />
+              }
             />
           ))}
           <Route
             path="/cart"
-            element={<Cart cards={cards} arr={arr} setArr={setArr} />}
+            element={
+              <Cart
+                removeItem={removeItem}
+                setCards={setCards}
+                cards={cards}
+                arr={arr}
+                setArr={setArr}
+              />
+            }
           />
         </Routes>
         <Sign setIsOpen={setSignIn} active={signIn}>

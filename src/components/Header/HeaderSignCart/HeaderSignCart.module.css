@@ -33,6 +33,42 @@
     margin-left: 10px;
     cursor: pointer;
 }
+.all_cart{
+    display: flex;
+}
+.images_cart{
+    position: relative;
+    display: flex;
+    gap: 10px;
+}
+
+.images_cart p:hover{
+    text-decoration: underline;
+}
+
+.images{
+display: flex;
+}
+
+.cart{
+    position: relative;
+}
+
+.ellipse{
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+.ellipse span{
+    color: white;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 8px;
+    line-height: 8px;
+    position: relative;
+    right: 20px;
+}
 
 .user{
     width: 18px;

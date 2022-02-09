@@ -74,6 +74,16 @@
     align-items: center;
     display: flex;
     gap: 20px;
+    position: relative;
+}
+
+.count div{
+    position: relative;
+}
+
+.count div:active{
+    top: 1px;
+    right: 1px;
 }
 
 .count p {
@@ -92,6 +102,8 @@
 .button {
     border: none;
     margin-top: 60px;
+    display: flex;
+    gap: 30px
 }
 
 .btn {
@@ -115,4 +127,11 @@
 .btn:active{
     top: 1px;
     right: 1px;
+}
+
+.active{
+    display: flex;
+    align-items: center;
+    color: #A3D69B;
+    gap: 10px;
 }

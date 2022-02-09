@@ -7,8 +7,27 @@
 }
 .container{
     margin: 0 auto;
-    width: 70%;
+    width: 1200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media (max-width: 1200px) {
+    .container{
+        width: 900px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container{
+        width: 700px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container{
+        width: 100%;
+        justify-content: center;
+    }
 }

@@ -5,15 +5,21 @@ import { ReactComponent as Cart } from '../../../assets/Images/cart_grad.svg'
 import { ReactComponent as Ellipse } from '../../../assets/Images/ellipse.svg'
 import { NavLink } from 'react-router-dom'
 
-function HeaderSignCart({ setSignIn, setSignUp, arr, signIn }) {
+function HeaderSignCart({ setSignIn, setSignUp, arr, signIn, isAuth, logout }) {
   return (
     <div className={styles.sign_cart}>
       <div className={styles.span_gap}>
         <div className={styles.user}>
           <User />
         </div>
-        <span onClick={() => setSignUp(true)}> Sign Up </span> <span>/</span>{' '}
-        <span onClick={() => setSignIn(true)}>Sign In</span>
+        {isAuth ? (
+          <h3 onClick={logout}>logout</h3>
+        ) : (
+          <>
+            <span onClick={() => setSignUp(true)}> Sign Up </span>{' '}
+            <span>/</span> <span onClick={() => setSignIn(true)}>Sign In</span>
+          </>
+        )}
       </div>
       <div className={styles.all_cart}>
         <NavLink to="/cart">

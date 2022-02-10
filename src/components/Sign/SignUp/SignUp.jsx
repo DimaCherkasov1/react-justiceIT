@@ -14,16 +14,16 @@ function SignUp({ setSignIn, setSignUp }) {
   )
   const [validForm, setValidForm] = useState(false)
 
-  // const onSubmit = (e) => {
-  //   const obj = {
-  //     name,
-  //     email,
-  //     password,
-  //   }
-  //
-  //   e.preventDefault()
-  //   localStorage.setItem('user', JSON.stringify(obj))
-  // }
+  const onSubmit = (e) => {
+    const obj = {
+      name,
+      email,
+      password,
+    }
+    e.preventDefault()
+    localStorage.setItem('user', JSON.stringify(obj))
+    localStorage.setItem('auth', JSON.stringify(true))
+  }
 
   useEffect(() => {
     if (nameError || emailError || passwordError) {
@@ -35,7 +35,6 @@ function SignUp({ setSignIn, setSignUp }) {
 
   const nameHandler = (e) => {
     setName(e.target.value)
-    console.log('===>name', e.target.value)
     const regexName = /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/
     if (!regexName.test(String(e.target.value).toLowerCase())) {
       setNameError('Имя некорректно')

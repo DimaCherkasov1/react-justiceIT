@@ -17,14 +17,28 @@ function App() {
   const [cards, setCards] = useState(MockCards)
   const [signIn, setSignIn] = useState(false)
   const [signUp, setSignUp] = useState(false)
-  const [arr, setArr] = useState([])
-
+  const [arr, setArr] = useState(() => {
+    const cartItem = localStorage.getItem('cart')
+    return JSON.parse(cartItem) ?? []
+  })
+  const [isAuth, setIsAuth] = useState(() => {
+    const auth = localStorage.getItem('auth')
+    return JSON.parse(auth).auth ?? false
+  })
+  console.log('===>isAuth', isAuth)
   const removeItem = useCallback(
     (id) => {
-      setArr(arr.filter((x) => x.id !== id))
+      const filterArr = arr.filter((x) => x.id !== id)
+      setArr(filterArr)
+      localStorage.setItem('cart', JSON.stringify(filterArr))
     },
     [arr]
   )
+
+  const logout = () => {
+    setIsAuth(false)
+    localStorage.setItem('auth', JSON.stringify({ auth: false }))
+  }
 
   return (
     <div className="wrapper">
@@ -35,6 +49,8 @@ function App() {
         setSignIn={setSignIn}
         signUp={signUp}
         setSignUp={setSignUp}
+        isAuth={isAuth}
+        logout={logout}
       />
       <div className="content">
         <Routes>

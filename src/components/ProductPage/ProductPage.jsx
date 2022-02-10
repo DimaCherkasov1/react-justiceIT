@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './ProductPage.module.css'
 import { ReactComponent as IceCream2 } from '../../assets/Images/icecream2.svg'
@@ -33,6 +33,10 @@ function ProductPage({ card, arr, setArr, setCard }) {
       setMessage('Added to cart')
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(arr))
+  }, [arr])
 
   const handleMinus = () => {
     if (amount === 1) {

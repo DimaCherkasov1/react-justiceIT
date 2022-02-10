@@ -8,8 +8,10 @@ import { NavLink } from 'react-router-dom'
 function HeaderSignCart({ setSignIn, setSignUp, arr, signIn }) {
   return (
     <div className={styles.sign_cart}>
-      <div>
-        <User />
+      <div className={styles.span_gap}>
+        <div className={styles.user}>
+          <User />
+        </div>
         <span onClick={() => setSignUp(true)}> Sign Up </span> <span>/</span>{' '}
         <span onClick={() => setSignIn(true)}>Sign In</span>
       </div>

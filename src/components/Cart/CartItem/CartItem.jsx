@@ -4,11 +4,11 @@ import { ReactComponent as IceCream2 } from '../../../assets/Images/icecream2.sv
 import { ReactComponent as Cross } from '../../../assets/Images/cross.svg'
 import { NavLink } from 'react-router-dom'
 
-function CartItem({ amount, name, price, id, removeItem }) {
+function CartItem({ amount, name, price, id, removeItem, image }) {
   return (
     <div className={styles.row_close}>
       <div className={styles.img_name_basket}>
-        <IceCream2 width="120px" height="96px" />
+        <img src={image} alt="ice cream" />
         <div>
           <NavLink to={`/item/${id}`}>{name}</NavLink>
           <p>{amount} pcs.</p>

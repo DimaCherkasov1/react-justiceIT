@@ -31,6 +31,11 @@
     border-radius: 30px;
 }
 
+.row_img_key{
+    display: flex;
+    gap: 50px;
+}
+
 .name_desk {
 
 }
@@ -134,4 +139,33 @@
     align-items: center;
     color: #A3D69B;
     gap: 10px;
+}
+
+@media (max-width: 992px){
+    .img_product{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px){
+    .row_img_key{
+        padding: 10px;
+    }
+}
+
+@media (max-width: 567px) {
+    .row_product{
+        flex-direction: column;
+    }
+    .img_product{
+        padding: 30px 50px 30px 50px;
+    }
+    .row_img_key{
+    flex-direction: column;
+    }
+    .img_product{
+    }
+    .key{
+    }
 }

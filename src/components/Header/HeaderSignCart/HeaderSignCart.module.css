@@ -2,7 +2,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 28px;
+}
+
+.span_gap{
+    display: flex;
 }
 
 .sign_cart div{
@@ -76,4 +79,49 @@ display: flex;
 
 .cart{
     width: 18px;
+}
+
+@media (max-width: 576px) {
+    .sign_cart{
+        gap: 0px;
+    }
+
+    .span_gap{
+        gap: 0;
+    }
+
+    .images_cart{
+        gap: 5px;
+    }
+    .user{
+        width: 13px;
+    }
+
+    .cart{
+        width: 13px;
+    }
+    .sign_cart span{
+        font-size: 10px;
+        line-height: 13px;
+        margin-left: 5px;
+    }
+    .sign_cart a{
+        font-size: 10px;
+        line-height: 13px;
+    }
+    .ellipse{
+        width: 25px;
+        left: 5px;
+    }
+    .ellipse span{
+        position: relative;
+        right: 15px;
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    .sign_cart{
+        gap: 60px;
+    }
 }

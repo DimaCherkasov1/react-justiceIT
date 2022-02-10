@@ -23,21 +23,20 @@ function Cart({ arr, setArr, cards, setCards, removeItem }) {
         </div>
         <div className={styles.row_basket}>
           <div className={styles.row_basket_main}>
-            {arr?.map((el) => {
-              return (
-                <CartItem
-                  removeItem={removeItem}
-                  amount={el.amount}
-                  inCart={el.inCart}
-                  key={el.id}
-                  el={el}
-                  name={el.name}
-                  price={el.price}
-                  countPrice={el.countPrice}
-                  id={el.id}
-                />
-              )
-            })}
+            {arr?.map((el) => (
+              <CartItem
+                removeItem={removeItem}
+                image={el.image}
+                amount={el.amount}
+                inCart={el.inCart}
+                key={el.id}
+                el={el}
+                name={el.name}
+                price={el.price}
+                countPrice={el.countPrice}
+                id={el.id}
+              />
+            ))}
           </div>
           <div className={styles.total_add}>
             <div className={styles.total}>

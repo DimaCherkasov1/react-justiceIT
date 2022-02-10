@@ -58,40 +58,44 @@ function ProductPage({ card, arr, setArr, setCard }) {
           <span className={styles.sspan}> / Product Page</span>
         </div>
         <div className={styles.row_product}>
-          <div className={styles.img_product}>
-            <IceCream2 />
-          </div>
-          <div className={styles.name_desk}>
-            <div className={styles.key}>
-              <span>SKU: {card.id}</span>
+          <div className={styles.row_img_key}>
+            <div className={styles.img_product}>
+              <img src={card.image} alt="" />
             </div>
-            <h1>Snow Tender Ice Cream</h1>
-            <p>Description:</p>
-            <p>{card.descriptionOne}</p>
-            <p>{card.descriptionTwo}</p>
-            <div className={styles.price_count}>
-              <span>${countPrice}</span>
-              <div className={styles.count}>
-                <div>
-                  <Minus onClick={() => handleMinus()} />
-                </div>{' '}
-                <span>{amount}</span>
-                <div>
-                  <Plus onClick={() => handlePlus()} />
+            <div className={styles.img_key}>
+              <div className={styles.name_desk}>
+                <div className={styles.key}>
+                  <span>SKU: {card.id}</span>
                 </div>
               </div>
-            </div>
-            <div className={styles.button}>
-              <button className={styles.btn} onClick={() => addCard()}>
-                <CartIcon />
-                Add to cart
-              </button>
-              {message && (
-                <div className={styles.active}>
-                  <Done />
-                  {message}
+              <h1>Snow Tender Ice Cream</h1>
+              <p>Description:</p>
+              <p>{card.descriptionOne}</p>
+              <p>{card.descriptionTwo}</p>
+              <div className={styles.price_count}>
+                <span>${countPrice}</span>
+                <div className={styles.count}>
+                  <div>
+                    <Minus onClick={() => handleMinus()} />
+                  </div>{' '}
+                  <span>{amount}</span>
+                  <div>
+                    <Plus onClick={() => handlePlus()} />
+                  </div>
                 </div>
-              )}
+              </div>
+              <div className={styles.button}>
+                <button className={styles.btn} onClick={() => addCard()}>
+                  <CartIcon />
+                  Add to cart
+                </button>
+                {message && (
+                  <div className={styles.active}>
+                    <Done />
+                    {message}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

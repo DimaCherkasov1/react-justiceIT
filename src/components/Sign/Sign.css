@@ -97,3 +97,12 @@ input{
 .create-acc a:hover{
     text-decoration: underline;
 }
+
+@media (max-width: 567px) {
+    .modal_content{
+        padding: 30px 15px;
+    }
+    input{
+        padding: 10px;
+    }
+}

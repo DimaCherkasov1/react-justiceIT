@@ -12,6 +12,7 @@ function Main({ cards }) {
           {cards.map((item) => {
             return (
               <MainItems
+                image={item.image}
                 key={item.id}
                 name={item.name}
                 id={item.id}

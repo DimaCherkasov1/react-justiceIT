@@ -1,14 +1,15 @@
 .nav_ul{
     display: flex;
     padding: 0;
+    gap: 50px;
 }
 
 .nav_ul li{
     display: flex;
+
 }
 
 .nav_ul li{
-    margin-left: 50px;
 }
 
 .nav_ul li:first-child{
@@ -23,7 +24,12 @@
     color: rgba(33, 37, 66, 0.7);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 576px) {
     .nav_ul{
+        gap: 25px;
+    }
+    .nav_ul li a{
+        font-size: 9px;
+        line-height: 10px;
     }
 }

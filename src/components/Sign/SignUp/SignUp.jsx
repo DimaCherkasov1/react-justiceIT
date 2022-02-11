@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import cart from '../../Cart/Cart'
 
 function SignUp({ setSignIn, setSignUp, setIsAuth }) {
   const [name, setName] = useState('')
@@ -23,6 +24,7 @@ function SignUp({ setSignIn, setSignUp, setIsAuth }) {
       email,
       password,
     }
+
     const validEmail = users.find((user) => {
       if (user.email === email) {
         return email
@@ -45,16 +47,15 @@ function SignUp({ setSignIn, setSignUp, setIsAuth }) {
       setEmailError('Пользователь с таким email уже существует')
     } else {
       e.preventDefault()
-      setUsers([...users, obj])
-      localStorage.setItem('auth', JSON.stringify(true))
-      setIsAuth(true)
+      localStorage.setItem('users', JSON.stringify([...users, obj]))
+      localStorage.setItem('token', email)
+      setIsAuth(email)
       setSignUp(false)
     }
+    const carts = JSON.parse(localStorage.getItem('carts'))
+    const newCarts = [...carts, { [email]: [] }]
+    localStorage.setItem('carts', JSON.stringify(newCarts))
   }
-
-  useEffect(() => {
-    localStorage.setItem('users', JSON.stringify(users))
-  }, [users])
 
   useEffect(() => {
     if (nameError || emailError || passwordError) {

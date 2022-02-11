@@ -1,17 +1,20 @@
 import React, { useMemo, useState } from 'react'
 import styles from './Cart.module.css'
 import { NavLink } from 'react-router-dom'
+import { Navigate } from 'react-router'
 import { ReactComponent as CartIcon } from '../../assets/Images/cart_white.svg'
 import CartItem from './CartItem/CartItem'
 
-function Cart({ arr, setArr, cards, setCards, removeItem }) {
+function Cart({ arr, setArr, cards, setCards, removeItem, isAuth }) {
   const totalPrice = useMemo(
     () => arr.reduce((acc, el) => acc + el.price * el.amount, 0),
     [arr]
   )
 
+  console.log(isAuth)
   return (
     <div className={styles.content_cart}>
+      {!isAuth && <Navigate to="/" />}
       <div className="container">
         <div>
           <NavLink to="/" className={styles.ahrefmain}>
@@ -20,7 +23,7 @@ function Cart({ arr, setArr, cards, setCards, removeItem }) {
           / <span className={styles.sspan}>Basket</span>
         </div>
         <div className={styles.title}>
-          <h1>Basket</h1>
+          <p>Basket</p>
         </div>
         <div className={styles.row_basket}>
           <div className={styles.row_basket_main}>

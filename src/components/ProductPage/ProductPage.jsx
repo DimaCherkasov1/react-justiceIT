@@ -34,10 +34,6 @@ function ProductPage({ card, arr, setArr, setCard, isAuth, setIsAuth }) {
     }
   }
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(arr))
-  }, [arr])
-
   const handleMinus = () => {
     if (amount === 1) {
       setAmount(1)

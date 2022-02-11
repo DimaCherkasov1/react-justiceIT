@@ -22,7 +22,8 @@ function SignIn({ setSignIn, setSignUp, setIsAuth }) {
         setPasswordDirty(true)
         setPasswordError('Введен неверный пароль')
       } else {
-        setIsAuth(true)
+        setIsAuth(email)
+        localStorage.setItem('token', email)
       }
       if (user.email === email && user.password === password) {
         setSignIn(false)

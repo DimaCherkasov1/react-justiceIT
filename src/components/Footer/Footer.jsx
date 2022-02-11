@@ -12,8 +12,7 @@ function Footer() {
         <div className="container">
           <div className={styles.up_footer_content}>
             <NavLink to="/">
-              {' '}
-              <Logo />{' '}
+              <Logo />
             </NavLink>
             <FooterNav />
           </div>

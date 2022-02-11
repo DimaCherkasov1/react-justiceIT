@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import styles from './Cart.module.css'
 import { NavLink } from 'react-router-dom'
 import { ReactComponent as CartIcon } from '../../assets/Images/cart_white.svg'
 import CartItem from './CartItem/CartItem'
 
 function Cart({ arr, setArr, cards, setCards, removeItem }) {
-  const totalPrice = arr.reduce((acc, el) => {
-    return acc + el.price * el.amount
-  }, 0)
+  const totalPrice = useMemo(
+    () => arr.reduce((acc, el) => acc + el.price * el.amount, 0),
+    [arr]
+  )
 
   return (
     <div className={styles.content_cart}>

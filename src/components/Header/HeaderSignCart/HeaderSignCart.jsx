@@ -8,36 +8,36 @@ import { NavLink } from 'react-router-dom'
 function HeaderSignCart({ setSignIn, setSignUp, arr, signIn, isAuth, logout }) {
   return (
     <div className={styles.sign_cart}>
-      <div className={styles.span_gap}>
-        <div className={styles.user}>
-          <User />
-        </div>
-        {isAuth ? (
-          <h3 onClick={logout}>logout</h3>
-        ) : (
-          <>
-            <span onClick={() => setSignUp(true)}> Sign Up </span>{' '}
-            <span>/</span> <span onClick={() => setSignIn(true)}>Sign In</span>
-          </>
-        )}
+      <div className={styles.user}>
+        <User />
       </div>
-      <div className={styles.all_cart}>
-        <NavLink to="/cart">
-          <div className={styles.images_cart}>
-            <div className={styles.images}>
-              <div className={styles.cart}>
-                <Cart />
-              </div>
-              {!!arr.length && (
-                <div className={styles.ellipse}>
-                  <Ellipse /> <span>{arr.length}</span>
+      {isAuth ? (
+        <>
+          <span onClick={logout}>logout</span>
+          <div className={styles.all_cart}>
+            <NavLink to="/cart">
+              <div className={styles.images_cart}>
+                <div className={styles.images}>
+                  <div className={styles.cart}>
+                    <Cart />
+                  </div>
+                  {!!arr.length && (
+                    <div className={styles.ellipse}>
+                      <Ellipse /> <span>{arr.length}</span>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            <p>Cart</p>
+                <p>Cart</p>
+              </div>
+            </NavLink>
           </div>
-        </NavLink>
-      </div>
+        </>
+      ) : (
+        <>
+          <span onClick={() => setSignUp(true)}> Sign Up </span> <span>/</span>{' '}
+          <span onClick={() => setSignIn(true)}>Sign In</span>
+        </>
+      )}
     </div>
   )
 }

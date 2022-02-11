@@ -17,15 +17,12 @@ function App() {
   const [cards, setCards] = useState(MockCards)
   const [signIn, setSignIn] = useState(false)
   const [signUp, setSignUp] = useState(false)
-  const [arr, setArr] = useState(() => {
-    const cartItem = localStorage.getItem('cart')
-    return JSON.parse(cartItem) ?? []
-  })
-  const [isAuth, setIsAuth] = useState(() => {
-    const auth = localStorage.getItem('auth')
-    return JSON.parse(auth).auth ?? false
-  })
-  console.log('===>isAuth', isAuth)
+  const [arr, setArr] = useState(
+    () => JSON.parse(localStorage.getItem('cart')) ?? []
+  )
+  const [isAuth, setIsAuth] = useState(
+    () => !!JSON.parse(localStorage.getItem('auth')) ?? false
+  )
   const removeItem = useCallback(
     (id) => {
       const filterArr = arr.filter((x) => x.id !== id)
@@ -61,6 +58,8 @@ function App() {
               path={`/item/${card.id}`}
               element={
                 <ProductPage
+                  isAuth={isAuth}
+                  setIsAuth={setIsAuth}
                   card={card}
                   arr={arr}
                   setArr={setArr}
@@ -83,10 +82,18 @@ function App() {
           />
         </Routes>
         <Sign setIsOpen={setSignIn} active={signIn}>
-          <SignIn setSignIn={setSignIn} setSignUp={setSignUp} />
+          <SignIn
+            setIsAuth={setIsAuth}
+            setSignIn={setSignIn}
+            setSignUp={setSignUp}
+          />
         </Sign>
         <Sign setIsOpen={setSignUp} active={signUp}>
-          <SignUp setSignIn={setSignIn} setSignUp={setSignUp} />
+          <SignUp
+            setIsAuth={setIsAuth}
+            setSignIn={setSignIn}
+            setSignUp={setSignUp}
+          />
         </Sign>
       </div>
       <Footer />

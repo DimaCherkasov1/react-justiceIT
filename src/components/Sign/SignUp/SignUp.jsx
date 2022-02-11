@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function SignUp({ setSignIn, setSignUp }) {
+function SignUp({ setSignIn, setSignUp, setIsAuth }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -13,6 +13,9 @@ function SignUp({ setSignIn, setSignUp }) {
     'Пароль не может быть пустым'
   )
   const [validForm, setValidForm] = useState(false)
+  const [users, setUsers] = useState(
+    () => JSON.parse(localStorage.getItem('users')) ?? []
+  )
 
   const onSubmit = (e) => {
     const obj = {
@@ -20,10 +23,38 @@ function SignUp({ setSignIn, setSignUp }) {
       email,
       password,
     }
+    const validEmail = users.find((user) => {
+      if (user.email === email) {
+        return email
+      }
+    })
+
     e.preventDefault()
-    localStorage.setItem('user', JSON.stringify(obj))
-    localStorage.setItem('auth', JSON.stringify(true))
+    const regexName = /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/
+    const re = /^\S+@\S+\.\S+$/
+    if (
+      !regexName.test(String(name).toLowerCase()) ||
+      !re.test(String(email).toLowerCase()) ||
+      password.length < 5 ||
+      password.length > 14
+    ) {
+      setNameDirty(true)
+      setNameError('Введены неправильные данные')
+    } else if (validEmail) {
+      setEmailDirty(true)
+      setEmailError('Пользователь с таким email уже существует')
+    } else {
+      e.preventDefault()
+      setUsers([...users, obj])
+      localStorage.setItem('auth', JSON.stringify(true))
+      setIsAuth(true)
+      setSignUp(false)
+    }
   }
+
+  useEffect(() => {
+    localStorage.setItem('users', JSON.stringify(users))
+  }, [users])
 
   useEffect(() => {
     if (nameError || emailError || passwordError) {

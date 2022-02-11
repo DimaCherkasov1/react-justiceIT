@@ -7,7 +7,7 @@ import { ReactComponent as Minus } from '../../assets/Images/minus.svg'
 import { ReactComponent as CartIcon } from '../../assets/Images/cart_white.svg'
 import { ReactComponent as Done } from '../../assets/Images/done.svg'
 
-function ProductPage({ card, arr, setArr, setCard }) {
+function ProductPage({ card, arr, setArr, setCard, isAuth, setIsAuth }) {
   const [amount, setAmount] = useState(1)
   const [message, setMessage] = useState('')
   const [countPrice, setCountPrice] = useState(card.price)
@@ -73,7 +73,7 @@ function ProductPage({ card, arr, setArr, setCard }) {
                 </div>
               </div>
               <h1>Snow Tender Ice Cream</h1>
-              <p>Description:</p>
+              <p className={styles.description}>Description:</p>
               <p>{card.descriptionOne}</p>
               <p>{card.descriptionTwo}</p>
               <div className={styles.price_count}>
@@ -89,10 +89,17 @@ function ProductPage({ card, arr, setArr, setCard }) {
                 </div>
               </div>
               <div className={styles.button}>
-                <button className={styles.btn} onClick={() => addCard()}>
-                  <CartIcon />
-                  Add to cart
-                </button>
+                {isAuth ? (
+                  <button className={styles.btn} onClick={addCard}>
+                    <CartIcon />
+                    Add to cart
+                  </button>
+                ) : (
+                  <button disabled={true} className={styles.btn_disable}>
+                    <CartIcon />
+                  </button>
+                )}
+
                 {message && (
                   <div className={styles.active}>
                     <Done />

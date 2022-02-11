@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function SignIn({ setSignIn, setSignUp }) {
+function SignIn({ setSignIn, setSignUp, setIsAuth }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [emailDirty, setEmailDirty] = useState(false)
@@ -10,6 +10,25 @@ function SignIn({ setSignIn, setSignUp }) {
     'Пароль не может быть пустым'
   )
   const [validForm, setValidForm] = useState(false)
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    const users = JSON.parse(localStorage.getItem('users'))
+    users.forEach((user) => {
+      if (user.email !== email) {
+        setEmailDirty(true)
+        setEmailError('Введен неверный email')
+      } else if (user.password !== password) {
+        setPasswordDirty(true)
+        setPasswordError('Введен неверный пароль')
+      } else {
+        setIsAuth(true)
+      }
+      if (user.email === email && user.password === password) {
+        setSignIn(false)
+      }
+    })
+  }
 
   useEffect(() => {
     if (emailError || passwordError) {
@@ -62,7 +81,7 @@ function SignIn({ setSignIn, setSignUp }) {
   return (
     <>
       <h2>Log in to your account</h2>
-      <form>
+      <form onSubmit={onSubmit}>
         <label className="email" htmlFor="email">
           Email
           {emailDirty && emailError && (

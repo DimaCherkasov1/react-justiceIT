@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
-function SignUp({ setSignIn, setSignUp, setIsAuth }) {
+function SignUp({
+  setSignIn,
+  setSignUp,
+  setIsAuth,
+  users,
+  setUsers,
+  cart,
+  setCart,
+}) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -13,22 +21,19 @@ function SignUp({ setSignIn, setSignUp, setIsAuth }) {
     'Пароль не может быть пустым'
   )
   const [validForm, setValidForm] = useState(false)
-  const [users, setUsers] = useState(
-    () => JSON.parse(localStorage.getItem('users')) ?? []
-  )
 
   const onSubmit = (e) => {
-    const obj = {
-      name,
-      email,
-      password,
-    }
     const validEmail = users.find((user) => {
       if (user.email === email) {
         return email
       }
     })
-
+    const obj = {
+      name,
+      email,
+      password,
+      cart,
+    }
     e.preventDefault()
     const regexName = /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/
     const re = /^\S+@\S+\.\S+$/
@@ -46,7 +51,7 @@ function SignUp({ setSignIn, setSignUp, setIsAuth }) {
     } else {
       e.preventDefault()
       setUsers([...users, obj])
-      localStorage.setItem('auth', JSON.stringify(true))
+      localStorage.setItem('token', email)
       setIsAuth(true)
       setSignUp(false)
     }

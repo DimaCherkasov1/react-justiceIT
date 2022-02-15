@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { ReactComponent as CartIcon } from '../../assets/Images/cart_white.svg'
 import CartItem from './CartItem/CartItem'
 
-function Cart({ arr, setArr, cards, setCards, removeItem }) {
+function Cart({ arr, setArr, cards, setCards, removeItem, setUsers, users }) {
   const totalPrice = useMemo(
     () => arr.reduce((acc, el) => acc + el.price * el.amount, 0),
     [arr]

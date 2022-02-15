@@ -15,6 +15,7 @@
     justify-content: center;
     width: 190px;
     height: 170px;
+    margin-left: 20px;
     }
 
 .img{
@@ -75,6 +76,9 @@ p{
     .item{
         width: 330px;
         margin-bottom: 60px;
+    }
+    .svg{
+        margin: 0;
     }
 }
 

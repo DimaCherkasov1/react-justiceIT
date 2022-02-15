@@ -7,17 +7,61 @@ import { ReactComponent as Minus } from '../../assets/Images/minus.svg'
 import { ReactComponent as CartIcon } from '../../assets/Images/cart_white.svg'
 import { ReactComponent as Done } from '../../assets/Images/done.svg'
 
-function ProductPage({ card, arr, setArr, setCard, isAuth, setIsAuth }) {
+function ProductPage({
+  card,
+  arr,
+  setArr,
+  setCard,
+  isAuth,
+  setIsAuth,
+  users,
+  setUsers,
+  cart,
+  setCart,
+}) {
   const [amount, setAmount] = useState(1)
   const [message, setMessage] = useState('')
   const [countPrice, setCountPrice] = useState(card.price)
   const [total, setTotal] = useState(0)
+  const [obj, setObj] = useState({})
+  const token = localStorage.getItem('token')
 
-  const addCard = () => {
-    if (!!arr.find((el) => el.id === card.id)) {
+  let indexUser, indexProduct
+
+  const addCard = (id) => {
+    const users = JSON.parse(localStorage.getItem('users'))
+
+    const user = users.find((user, index) => {
+      if (user.email === token) {
+        indexUser = index
+        return user
+      }
+    })
+
+    const product = user.cart.find((product, index) => {
+      if (product.id === id) {
+        indexProduct = index
+        return product
+      }
+    })
+    product
+      ? (user.cart[indexProduct] = {
+          ...product,
+          amount: product.amount + amount,
+        })
+      : user.cart.push({
+          ...card,
+          amount: amount,
+        })
+
+    users[indexUser] = user
+
+    localStorage.setItem('users', JSON.stringify(users))
+
+    if (!!arr.find((el) => el.id === id)) {
       setArr(
         arr.map((elem) => {
-          if (elem.id === card.id) {
+          if (elem.id === id) {
             return {
               ...elem,
               amount: elem.amount + amount,
@@ -33,10 +77,6 @@ function ProductPage({ card, arr, setArr, setCard, isAuth, setIsAuth }) {
       setMessage('Added to cart')
     }
   }
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(arr))
-  }, [arr])
 
   const handleMinus = () => {
     if (amount === 1) {
@@ -89,8 +129,11 @@ function ProductPage({ card, arr, setArr, setCard, isAuth, setIsAuth }) {
                 </div>
               </div>
               <div className={styles.button}>
-                {isAuth ? (
-                  <button className={styles.btn} onClick={addCard}>
+                {localStorage.getItem('token') ? (
+                  <button
+                    className={styles.btn}
+                    onClick={() => addCard(card.id)}
+                  >
                     <CartIcon />
                     Add to cart
                   </button>

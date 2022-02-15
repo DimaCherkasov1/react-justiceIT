@@ -11,7 +11,7 @@ function HeaderSignCart({ setSignIn, setSignUp, arr, signIn, isAuth, logout }) {
       <div className={styles.user}>
         <User />
       </div>
-      {isAuth ? (
+      {localStorage.getItem('token') ? (
         <>
           <span onClick={logout}>logout</span>
           <div className={styles.all_cart}>

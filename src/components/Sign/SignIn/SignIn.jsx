@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function SignIn({ setSignIn, setSignUp, setIsAuth }) {
+function SignIn({ setSignIn, setSignUp, setIsAuth, users }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [emailDirty, setEmailDirty] = useState(false)
@@ -22,6 +22,7 @@ function SignIn({ setSignIn, setSignUp, setIsAuth }) {
         setPasswordDirty(true)
         setPasswordError('Введен неверный пароль')
       } else {
+        localStorage.setItem('token', email)
         setIsAuth(true)
       }
       if (user.email === email && user.password === password) {

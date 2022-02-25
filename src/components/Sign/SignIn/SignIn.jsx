@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
-function SignIn({ setSignIn, setSignUp, setIsAuth, users }) {
+function SignIn({ setSignIn, setSignUp, setIsAuth, users, setUsers, cart }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [emailDirty, setEmailDirty] = useState(false)
@@ -11,25 +13,50 @@ function SignIn({ setSignIn, setSignUp, setIsAuth, users }) {
   )
   const [validForm, setValidForm] = useState(false)
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    const users = JSON.parse(localStorage.getItem('users'))
-    users.forEach((user) => {
-      if (user.email !== email) {
-        setEmailDirty(true)
-        setEmailError('Введен неверный email')
-      } else if (user.password !== password) {
-        setPasswordDirty(true)
-        setPasswordError('Введен неверный пароль')
-      } else {
-        localStorage.setItem('token', email)
-        setIsAuth(true)
-      }
-      if (user.email === email && user.password === password) {
-        setSignIn(false)
-      }
-    })
+    // const users = JSON.parse(localStorage.getItem('users'))
+    // users.forEach((user) => {
+    //   if (user.email !== email) {
+    //     setEmailDirty(true)
+    //     setEmailError('Введен неверный email')
+    //   } else if (user.password !== password) {
+    //     setPasswordDirty(true)
+    //     setPasswordError('Введен неверный пароль')
+    //   } else {
+    //     localStorage.setItem('token', email)
+    //     setIsAuth(true)
+    //   }
+    //   if (user.email === email && user.password === password) {
+    //     setSignIn(false)
+    //   }
+    // })
+    const obj = {
+      email,
+      password,
+      cart,
+    }
+    setUsers({...users, obj})
+
+    try {
+      const {data} = await axios.post('http://localhost:4001/api/auth/login', {
+        email,
+        password
+      })
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('users', JSON.stringify(data.user))
+      setIsAuth(true)
+      setSignIn(false)
+      return jwt_decode(data.token)
+    } catch (e){
+      setEmailDirty(true)
+      setEmailError(e.response.data.message)
+    }
   }
+
+  useEffect(() => {
+    localStorage.setItem('users', JSON.stringify(users))
+  }, [users])
 
   useEffect(() => {
     if (emailError || passwordError) {

@@ -1,4 +1,7 @@
+import jwt_decode from "jwt-decode";
+import axios from "axios";
 import React, { useEffect, useState } from 'react'
+
 
 function SignUp({
   setSignIn,
@@ -22,44 +25,84 @@ function SignUp({
   )
   const [validForm, setValidForm] = useState(false)
 
-  const onSubmit = (e) => {
-    const validEmail = users.find((user) => {
-      if (user.email === email) {
-        return email
-      }
-    })
-    const obj = {
-      name,
-      email,
-      password,
-      cart,
-    }
+  const register = async (email, password, name, e) => {
     e.preventDefault()
-    const regexName = /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/
-    const re = /^\S+@\S+\.\S+$/
-    if (
-      !regexName.test(String(name).toLowerCase()) ||
-      !re.test(String(email).toLowerCase()) ||
-      password.length < 5 ||
-      password.length > 14
-    ) {
-      setNameDirty(true)
-      setNameError('Введены неправильные данные')
-    } else if (validEmail) {
-      setEmailDirty(true)
-      setEmailError('Пользователь с таким email уже существует')
-    } else {
-      e.preventDefault()
-      setUsers([...users, obj])
-      localStorage.setItem('token', email)
+      const obj = {
+        email,
+        password,
+        cart,
+      }
+      const regexName = /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/
+      const re = /^\S+@\S+\.\S+$/
+      if (
+        !regexName.test(String(name).toLowerCase()) ||
+        !re.test(String(email).toLowerCase()) ||
+        password.length < 5 ||
+        password.length > 14
+      ) {
+        setNameDirty(true)
+        setNameError('Введены неправильные данные')
+      }
+    try {
+      const {data} = await axios.post('http://localhost:4001/api/auth/register', {
+        name,
+        email,
+        password
+      })
+      console.log(data)
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('users', JSON.stringify(data.user))
+      localStorage.setItem('email', JSON.stringify(data.user.email))
+      setUsers(data.user)
+
       setIsAuth(true)
-      setSignUp(false)
+          setSignUp(false)
+      return jwt_decode(data.token)
+    } catch (e){
+        setEmailDirty(true)
+      setEmailError(e.response.data.message)
     }
   }
 
   useEffect(() => {
-    localStorage.setItem('users', JSON.stringify(users))
+    JSON.parse(localStorage.getItem('users'))
   }, [users])
+
+  // const onSubmit = (e) => {
+  //   const validEmail = users.find((user) => {
+  //     if (user.email === email) {
+  //       return email
+  //     }
+  //   })
+  //   const obj = {
+  //     name,
+  //     email,
+  //     password,
+  //     cart,
+  //   }
+  //   e.preventDefault()
+  //   const regexName = /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/
+  //   const re = /^\S+@\S+\.\S+$/
+  //   if (
+  //     !regexName.test(String(name).toLowerCase()) ||
+  //     !re.test(String(email).toLowerCase()) ||
+  //     password.length < 5 ||
+  //     password.length > 14
+  //   ) {
+  //     setNameDirty(true)
+  //     setNameError('Введены неправильные данные')
+  //   } else if (validEmail) {
+  //     setEmailDirty(true)
+  //     setEmailError('Пользователь с таким email уже существует')
+  //   } else {
+  //     e.preventDefault()
+  //     setUsers([...users, obj])
+  //     localStorage.setItem('token', email)
+  //     setIsAuth(true)
+  //     setSignUp(false)
+  //   }
+  // }
+
 
   useEffect(() => {
     if (nameError || emailError || passwordError) {
@@ -128,7 +171,7 @@ function SignUp({
   return (
     <>
       <h2>Create an account</h2>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={(e) => register(email, password, name, e)}>
         <label className="name" htmlFor="name">
           Name
           {nameDirty && nameError && (

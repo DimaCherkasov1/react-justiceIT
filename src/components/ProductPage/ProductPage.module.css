@@ -179,6 +179,12 @@
     .row_img_key{
         padding: 10px;
     }
+    .key span {
+        padding: 8px 16px;
+        background: #F2F2FA;
+        border-radius: 26px;
+        font-size: 10px;
+    }
 }
 
 @media (max-width: 567px) {

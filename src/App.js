@@ -6,79 +6,71 @@ import Cart from './components/Cart/Cart'
 import Sign from './components/Sign/Sign'
 import SignIn from './components/Sign/SignIn/SignIn'
 import SignUp from './components/Sign/SignUp/SignUp'
+import {Routers} from "./components/routes";
 import { useCallback, useEffect, useState } from 'react'
-import MockCards from './MockData/MainItem'
 
 import { Routes, Route } from 'react-router-dom'
 
 import './App.css'
+import axios from "axios";
 
 function App() {
-  const [cards, setCards] = useState(MockCards)
+  const [cards, setCards] = useState([])
   const [signIn, setSignIn] = useState(false)
   const [signUp, setSignUp] = useState(false)
   const [cart, setCart] = useState([])
-  const [users, setUsers] = useState(
-    () => JSON.parse(localStorage.getItem('users')) ?? []
-  )
+  const [users, setUsers] = useState(()=> JSON.parse(localStorage.getItem('users')) ?? {})
   const [isAuth, setIsAuth] = useState(
     JSON.parse(localStorage.getItem(localStorage.getItem('token')))
   )
+
+
   const [arr, setArr] = useState(() => {
-    const usersCart = JSON.parse(localStorage.getItem('users')) ?? []
-    const token = localStorage.getItem('token')
-    const user = usersCart.find((user) => {
-      if (user.email === token) {
-        return user.cart
-      }
-    })
-    return user ? user.cart : []
+    if(JSON.parse(localStorage.getItem('users'))){
+      const cart = JSON.parse(localStorage.getItem('users')).cart
+      return cart
+    }  else {
+      return []
+    }
   })
 
   useEffect(() => {
     if (isAuth) {
-      const usersCart = JSON.parse(localStorage.getItem('users')) ?? []
-      const token = localStorage.getItem('token')
-      const cart = usersCart.find((user) => {
-        if (user.email === token) {
-          return user.cart
-        }
-      })
-      setArr(cart.cart)
+
+      setArr(users.cart)
     }
   }, [isAuth])
 
-  let indexUser, indexProduct
+useEffect(() => {
+  axios.get('http://localhost:4001/api/product').then(response =>{
+    return setCards(response.data)
+  })
+}, [])
 
-  const removeItem = useCallback(
-    (id) => {
-      const usersCart = JSON.parse(localStorage.getItem('users'))
-      const token = localStorage.getItem('token')
 
-      users.find((user, index) => {
-        if (user.email === token) {
-          indexUser = index
-          return user
-        }
-      })
 
-      const filterArr = arr.filter((x) => x.id !== id)
 
-      usersCart[indexUser].cart = filterArr
 
-      localStorage.setItem('users', JSON.stringify(usersCart))
-
-      setArr(filterArr)
-    },
-    [arr]
-  )
-
-  console.log('===>arr', arr)
 
   const logout = () => {
     setIsAuth(false)
     localStorage.removeItem('token')
+    localStorage.removeItem('users')
+    localStorage.removeItem('email')
   }
+
+  // const check = async () => {
+  //   const {data} = await axios.get('http://localhost:4001/api/auth/auth', {headers:{
+  //     'authorization':localStorage.getItem('token')
+  //     }})
+  // }
+  //
+  // useEffect(() => {
+  //     check().then(data => {
+  //       setIsAuth(true)
+  //     })
+  // }, [])
+
 
   return (
     <div className="wrapper">
@@ -94,14 +86,17 @@ function App() {
       />
       <div className="content">
         <Routes>
+          {/*{Routers.map(({path, Component}) =>*/}
+          {/*  <Route key={path} path={path} component={Component} />*/}
+          {/*)}*/}
           <Route path="/" element={<Main cards={cards} />} />
           {cards?.map((card, index) => (
             <Route
-              key={card.id}
-              path={`/item/${card.id}`}
+              key={card._id}
+              path={`/item/${card._id}`}
               element={
                 <ProductPage
-                  cart={cart}
+                    cart={cart}
                   setCart={setCart}
                   users={users}
                   setUsers={setUsers}
@@ -119,7 +114,7 @@ function App() {
             path="/cart"
             element={
               <Cart
-                removeItem={removeItem}
+                  isAuth={isAuth}
                 setCards={setCards}
                 cards={cards}
                 arr={arr}
@@ -130,6 +125,7 @@ function App() {
         </Routes>
         <Sign setIsOpen={setSignIn} active={signIn}>
           <SignIn
+              cart={cart}
             users={users}
             setUsers={setUsers}
             setIsAuth={setIsAuth}

@@ -7,9 +7,9 @@ import Sign from './components/Sign/Sign'
 import SignIn from './components/Sign/SignIn/SignIn'
 import SignUp from './components/Sign/SignUp/SignUp'
 import {Routers} from "./components/routes";
-import { useCallback, useEffect, useState } from 'react'
+import {useCallback, useEffect, useState} from 'react'
 
-import { Routes, Route } from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom'
 
 import './App.css'
 import axios from "axios";
@@ -19,17 +19,18 @@ function App() {
   const [signIn, setSignIn] = useState(false)
   const [signUp, setSignUp] = useState(false)
   const [cart, setCart] = useState([])
-  const [users, setUsers] = useState(()=> JSON.parse(localStorage.getItem('users')) ?? {})
+  const [users, setUsers] = useState(() => JSON.parse(localStorage.getItem('users')) ?? {})
   const [isAuth, setIsAuth] = useState(
-    JSON.parse(localStorage.getItem(localStorage.getItem('token')))
+      localStorage.getItem('token')
   )
 
+  console.log(isAuth)
 
   const [arr, setArr] = useState(() => {
-    if(JSON.parse(localStorage.getItem('users'))){
+    if (JSON.parse(localStorage.getItem('users'))) {
       const cart = JSON.parse(localStorage.getItem('users')).cart
       return cart
-    }  else {
+    } else {
       return []
     }
   })
@@ -41,15 +42,11 @@ function App() {
     }
   }, [isAuth])
 
-useEffect(() => {
-  axios.get('http://localhost:4001/api/product').then(response =>{
-    return setCards(response.data)
-  })
-}, [])
-
-
-
-
+  useEffect(() => {
+    axios.get('http://localhost:4001/api/product').then(response => {
+      return setCards(response.data)
+    })
+  }, [])
 
 
   const logout = () => {
@@ -73,80 +70,80 @@ useEffect(() => {
 
 
   return (
-    <div className="wrapper">
-      <Header
-        arr={arr}
-        setArr={setArr}
-        signIn={signIn}
-        setSignIn={setSignIn}
-        signUp={signUp}
-        setSignUp={setSignUp}
-        isAuth={isAuth}
-        logout={logout}
-      />
-      <div className="content">
-        <Routes>
-          {/*{Routers.map(({path, Component}) =>*/}
-          {/*  <Route key={path} path={path} component={Component} />*/}
-          {/*)}*/}
-          <Route path="/" element={<Main cards={cards} />} />
-          {cards?.map((card, index) => (
-            <Route
-              key={card._id}
-              path={`/item/${card._id}`}
-              element={
-                <ProductPage
-                    cart={cart}
-                  setCart={setCart}
-                  users={users}
-                  setUsers={setUsers}
-                  isAuth={isAuth}
-                  setIsAuth={setIsAuth}
-                  card={card}
-                  arr={arr}
-                  setArr={setArr}
-                  setCard={setCards}
+      <div className="wrapper">
+        <Header
+            arr={arr}
+            setArr={setArr}
+            signIn={signIn}
+            setSignIn={setSignIn}
+            signUp={signUp}
+            setSignUp={setSignUp}
+            isAuth={isAuth}
+            logout={logout}
+        />
+        <div className="content">
+          <Routes>
+            {/*{Routers.map(({path, Component}) =>*/}
+            {/*  <Route key={path} path={path} component={Component} />*/}
+            {/*)}*/}
+            <Route path="/" element={<Main cards={cards}/>}/>
+            {cards?.map((card, index) => (
+                <Route
+                    key={card._id}
+                    path={`/item/${card._id}`}
+                    element={
+                      <ProductPage
+                          cart={cart}
+                          setCart={setCart}
+                          users={users}
+                          setUsers={setUsers}
+                          isAuth={isAuth}
+                          setIsAuth={setIsAuth}
+                          card={card}
+                          arr={arr}
+                          setArr={setArr}
+                          setCard={setCards}
+                      />
+                    }
                 />
-              }
+            ))}
+            <Route
+                path="/cart"
+                element={
+                  <Cart
+                      isAuth={isAuth}
+                      setCards={setCards}
+                      cards={cards}
+                      arr={arr}
+                      setArr={setArr}
+                  />
+                }
             />
-          ))}
-          <Route
-            path="/cart"
-            element={
-              <Cart
-                  isAuth={isAuth}
-                setCards={setCards}
-                cards={cards}
-                arr={arr}
-                setArr={setArr}
-              />
-            }
-          />
-        </Routes>
-        <Sign setIsOpen={setSignIn} active={signIn}>
-          <SignIn
-              cart={cart}
-            users={users}
-            setUsers={setUsers}
-            setIsAuth={setIsAuth}
-            setSignIn={setSignIn}
-            setSignUp={setSignUp}
-          />
-        </Sign>
-        <Sign setIsOpen={setSignUp} active={signUp}>
-          <SignUp
-            cart={cart}
-            setCart={setCart}
-            users={users}
-            setUsers={setUsers}
-            setIsAuth={setIsAuth}
-            setSignIn={setSignIn}
-            setSignUp={setSignUp}
-          />
-        </Sign>
+          </Routes>
+          <Sign setIsOpen={setSignIn} active={signIn}>
+            <SignIn
+                cart={cart}
+                users={users}
+                setUsers={setUsers}
+                setIsAuth={setIsAuth}
+                setSignIn={setSignIn}
+                setSignUp={setSignUp}
+            />
+          </Sign>
+          <Sign setIsOpen={setSignUp} active={signUp}>
+            <SignUp
+                cart={cart}
+                setCart={setCart}
+                users={users}
+                setUsers={setUsers}
+                setIsAuth={setIsAuth}
+                setSignIn={setSignIn}
+                setSignUp={setSignUp}
+            />
+          </Sign>
+        </div>
+        <Footer/>
       </div>
-      <Footer />
-    </div>
   )
 }
 

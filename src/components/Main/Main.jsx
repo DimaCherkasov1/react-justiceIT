@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styles from './Main.module.css'
 import MainTitle from './MainTitle/MainTitle'
 import MainItems from './MainItems/MainItems'
+import axios from "axios";
 
 function Main({ cards }) {
+
   return (
     <main className={styles.main}>
       <div className="container">
@@ -12,9 +14,10 @@ function Main({ cards }) {
           {cards.map((item) => {
             return (
               <MainItems
-                key={item.id}
+                image={item.image}
+                key={item._id}
                 name={item.name}
-                id={item.id}
+                id={item._id}
                 price={item.price}
               />
             )

@@ -34,9 +34,6 @@
     display: flex;
 }
 
-
-
-
 .total_add{
     width: 30%;
     display: flex;
@@ -91,4 +88,18 @@
 .btn:active{
     top: 1px;
     right: 1px;
+}
+
+@media (max-width: 576px) {
+    .row_basket{
+        padding: 20px;
+        flex-direction: column;
+    }
+    .total_add{
+        align-items: start;
+        margin-top: 20px;
+    }
+    .button{
+        margin-top: 20px;
+    }
 }

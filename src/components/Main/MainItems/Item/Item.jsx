@@ -1,22 +1,24 @@
-import React, {useState} from "react";
-import styles from "./Item.module.css"
-import {ReactComponent as IceCream2} from "../../../../assets/Images/icecream2.svg";
-import {NavLink} from "react-router-dom";
+import React, { useState } from 'react'
+import styles from './Item.module.css'
+import { ReactComponent as IceCream2 } from '../../../../assets/Images/icecream2.svg'
+import { NavLink } from 'react-router-dom'
 
-function Item({name, id, price}) {
+function Item({ name, id, price, image }) {
   return (
-      <div className={styles.item}>
+    <div className={styles.item}>
+      <NavLink to={`/item/${id}`}>
         <div className={styles.up_item}>
-        <div className={styles.svg}>
-          <IceCream2 />
-        </div>
+          <div className={styles.svg}>
+            <img src={'http://localhost:4000' + image} alt="ice cream" />
+          </div>
         </div>
         <div className={styles.name_cream}>
-          <NavLink to={`/item/${id}`}>{name}</NavLink>
-          <p>{price}</p>
+          <h2>{name}</h2>
+          <p>${price}</p>
         </div>
-      </div>
+      </NavLink>
+    </div>
   )
 }
 
-export default Item;
+export default Item

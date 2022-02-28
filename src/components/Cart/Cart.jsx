@@ -10,7 +10,6 @@ function Cart({ arr, setArr, cards, setCards, setUsers, users, isAuth }) {
     () => arr?.reduce((acc, el) => acc + el.price * el.amount, 0),
     [arr]
   )
-  console.log(isAuth)
 
   return (
       <>

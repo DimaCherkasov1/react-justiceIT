@@ -16,9 +16,7 @@ function CartItem({ amount, name, price, id, image, setArr }) {
 
   const removeItem = async (id) => {
         try {
-          console.log(email)
-          console.log(cart)
-          const {data} = await axios.delete('http://localhost:4001/api/cart',{
+          const {data} = await axios.delete('http://localhost:4000/api/cart',{
             headers:{},
             data:{email, id}
           })
@@ -32,7 +30,7 @@ function CartItem({ amount, name, price, id, image, setArr }) {
   return (
     <div className={styles.row_close}>
       <div className={styles.img_name_basket}>
-        <img src={'http://localhost:4001' + image} alt="ice cream" />
+        <img src={'http://localhost:4000' + image} alt="ice cream" />
         <div>
           <NavLink to={`/item/${id}`}>{name}</NavLink>
           <p>{amount} pcs.</p>

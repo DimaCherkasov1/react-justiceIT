@@ -9,7 +9,7 @@ function Item({ name, id, price, image }) {
       <NavLink to={`/item/${id}`}>
         <div className={styles.up_item}>
           <div className={styles.svg}>
-            <img src={'http://localhost:4001' + image} alt="ice cream" />
+            <img src={'http://localhost:4000' + image} alt="ice cream" />
           </div>
         </div>
         <div className={styles.name_cream}>

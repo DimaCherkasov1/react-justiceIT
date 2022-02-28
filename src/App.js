@@ -24,49 +24,35 @@ function App() {
       localStorage.getItem('token')
   )
 
-  console.log(isAuth)
 
   const [arr, setArr] = useState(() => {
-    if (JSON.parse(localStorage.getItem('users'))) {
-      const cart = JSON.parse(localStorage.getItem('users')).cart
-      return cart
-    } else {
-      return []
-    }
+    return  JSON.parse(localStorage.getItem('users')) ? JSON.parse(localStorage.getItem('users')).cart : []
   })
 
-  useEffect(() => {
-    if (isAuth) {
 
-      setArr(users.cart)
-    }
-  }, [isAuth])
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem('users'))
+  //   if (user) {
+  //     setArr(users.cart)
+  //   } else {
+  //     setArr([])
+  //   }
+  // }, [users])
 
   useEffect(() => {
-    axios.get('http://localhost:4001/api/product').then(response => {
+    axios.get('http://localhost:4000/api/product').then(response => {
       return setCards(response.data)
     })
   }, [])
 
 
-  const logout = () => {
+  const logout = useCallback( () => {
     setIsAuth(false)
+    setArr([])
     localStorage.removeItem('token')
     localStorage.removeItem('users')
     localStorage.removeItem('email')
-  }
-
-  // const check = async () => {
-  //   const {data} = await axios.get('http://localhost:4001/api/auth/auth', {headers:{
-  //     'authorization':localStorage.getItem('token')
-  //     }})
-  // }
-  //
-  // useEffect(() => {
-  //     check().then(data => {
-  //       setIsAuth(true)
-  //     })
-  // }, [])
+  })
 
 
   return (
@@ -122,6 +108,7 @@ function App() {
           </Routes>
           <Sign setIsOpen={setSignIn} active={signIn}>
             <SignIn
+                setArr={setArr}
                 cart={cart}
                 users={users}
                 setUsers={setUsers}

@@ -28,10 +28,7 @@ function ProductPage({
   const [email, setEmail] = useState(() => {
     return  JSON.parse(localStorage.getItem('users'))
   })
-  useEffect(()=> {
-    const cart = JSON.parse(localStorage.getItem('users')).cart
-    setArr(cart)
-  }, [])
+
 
 
   useEffect(() => {
@@ -41,9 +38,10 @@ function ProductPage({
 
   const addCard = async () => {
     try {
-      const {data} = await axios.post('http://localhost:4001/api/cart', {
-      ...email, card
+      const {data} = await axios.post('http://localhost:4000/api/cart', {
+      ...email, card, currentCardId:card._id, amount
       })
+      console.log('===>data.cart', data.cart)
       setArr(data.cart)
       localStorage.setItem('users', JSON.stringify(data))
     } catch (e){
@@ -74,7 +72,7 @@ function ProductPage({
         <div className={styles.row_product}>
           <div className={styles.row_img_key}>
             <div className={styles.img_product}>
-              <img src={'http://localhost:4001' + card.image} alt="" />
+              <img src={'http://localhost:4000' + card.image} alt="" />
             </div>
             <div className={styles.img_key}>
               <div className={styles.name_desk}>

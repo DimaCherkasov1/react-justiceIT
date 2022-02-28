@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-function SignIn({ setSignIn, setSignUp, setIsAuth, users, setUsers, cart }) {
+function SignIn({ setSignIn, setSignUp, setIsAuth, users, setUsers, cart, setArr }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [emailDirty, setEmailDirty] = useState(false)
@@ -39,7 +39,7 @@ function SignIn({ setSignIn, setSignUp, setIsAuth, users, setUsers, cart }) {
     setUsers({...users, obj})
 
     try {
-      const {data} = await axios.post('http://localhost:4001/api/auth/login', {
+      const {data} = await axios.post('http://localhost:4000/api/auth/login', {
         email,
         password
       })
@@ -47,6 +47,7 @@ function SignIn({ setSignIn, setSignUp, setIsAuth, users, setUsers, cart }) {
       localStorage.setItem('users', JSON.stringify(data.user))
       setIsAuth(true)
       setSignIn(false)
+      setArr(data.user.cart)
       return jwt_decode(data.token)
     } catch (e){
       setEmailDirty(true)
@@ -54,9 +55,7 @@ function SignIn({ setSignIn, setSignUp, setIsAuth, users, setUsers, cart }) {
     }
   }
 
-  useEffect(() => {
-    localStorage.setItem('users', JSON.stringify(users))
-  }, [users])
+
 
   useEffect(() => {
     if (emailError || passwordError) {

@@ -27,11 +27,6 @@ function SignUp({
 
   const register = async (email, password, name, e) => {
     e.preventDefault()
-      const obj = {
-        email,
-        password,
-        cart,
-      }
       const regexName = /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/
       const re = /^\S+@\S+\.\S+$/
       if (
@@ -44,17 +39,15 @@ function SignUp({
         setNameError('Введены неправильные данные')
       }
     try {
-      const {data} = await axios.post('http://localhost:4001/api/auth/register', {
+      const {data} = await axios.post('http://localhost:4000/api/auth/register', {
         name,
         email,
         password
       })
-      console.log(data)
       localStorage.setItem('token', data.token)
       localStorage.setItem('users', JSON.stringify(data.user))
       localStorage.setItem('email', JSON.stringify(data.user.email))
       setUsers(data.user)
-
       setIsAuth(true)
           setSignUp(false)
       return jwt_decode(data.token)
